@@ -3,8 +3,6 @@ const mysql = require('mysql2');
 const cors = require('cors');
 var app = express();
 
-app.use(cors());
-
 var dbConnect = mysql.createConnection({
     host: 'localhost',
     user: 'root',    
@@ -18,6 +16,14 @@ dbConnect.connect(function(err) {
         console.log("Connected to the database");
     }    
 });
+
+app.use(cors());
+
+app.use('/login', (req, res) => {
+    res.send({
+        token: 'test123'
+    });
+})
 
 app.listen(8080, function(err) {
     if(err) console.log("Did not connect to server");
